@@ -8,12 +8,92 @@
 
 </head>
 <body>
+
+
+
     
     <h1>公開用リポジトリ</h1>
-    <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhyamed\taiiiiii</p>
+    <p>
+<h2>1. まずは心と体を休める</h2>
+
+<p>
+• 考えるのをやめる： 意味を探そうとすればするほど、泥沼にはまってしまいます。今は「休む時間」と割り切りましょう。</p>
+<p>
+• 五感に意識を向ける： 温かい飲み物を飲む、好きな音楽を聴く、お風呂にゆっくり浸かるなど、頭ではなく「体の感覚」を癒やしてください。</p>
+<p>
+• 睡眠をとる： 脳が疲労するとネガティブな思考がループしやすくなります。とにかく寝て脳を休ませてください。</p>
+
+<h2>2. 今の感情をそのまま受け入れる</h2>
+<p>
+• 否定しない： 「そう思うのも無理はない」「今はそれくらい辛いんだな」と、自分の味方になってあげてください。</p>
+<p>
+• 書き出す： モヤモヤする気持ちや、不満、悲しみをノートやスマホのメモに殴り書きして、外に吐き出してみましょう。</p>
+
+<h2>3. 「小さな意味」だけを見る</h2>
+<p></p>
+• 大きな意味は不要： 人生や存在の大きな意味を今すぐ見つける必要はありません。</p>
+<p>
+• 今日の目標を最小にする： 「今日を生き延びた」「美味しいものを食べた」「ベッドから起きた」、それだけで100点満点です。
+    </p>
 
 
 
     
 </body>
+
+<div class="particle-layer" aria-hidden="true"></div>
+<script
+const particleLayer = document.querySelector('.particle-layer');
+const colors = [
+  'var(--particle-wine)',
+  'var(--particle-green)',
+  'var(--particle-ivory)',
+];
+const maxParticles = 70;
+let lastParticleTime = 0;
+
+function createParticle(x, y) {
+  if (particleLayer.childElementCount >= maxParticles) {
+    particleLayer.firstElementChild?.remove();
+  }
+
+  const particle = document.createElement('span');
+  const size = 10 + Math.random() * 38;
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 35 + Math.random() * 115;
+  const duration = 1800 + Math.random() * 1400;
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+  particle.className = 'particle';
+  particle.style.width = `${size}px`;
+  particle.style.height = `${size}px`;
+  particle.style.backgroundColor = `color-mix(in srgb, ${color} ${Math.round((0.55 + Math.random() * 0.3) * 100)}%, transparent)`;
+  particle.style.left = `${x - size / 2}px`;
+  particle.style.top = `${y - size / 2}px`;
+  particleLayer.append(particle);
+
+  const driftX = Math.cos(angle) * distance;
+  const driftY = Math.sin(angle) * distance;
+  const animation = particle.animate(
+    [
+      { transform: 'translate(0, 0) scale(1)', opacity: 0.9 },
+      { transform: `translate(${driftX}px, ${driftY}px) scale(0.15)`, opacity: 0 },
+    ],
+    { duration, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' },
+  );
+
+  animation.onfinish = () => particle.remove();
+}
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.addEventListener('pointermove', (event) => {
+    const now = performance.now();
+    if (now - lastParticleTime < 18) return;
+
+    lastParticleTime = now;
+    createParticle(event.clientX, event.clientY);
+  });
+}
+
+</script>
 </html>
